@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"math/rand"
 	"time"
 )
@@ -23,9 +23,16 @@ func InsertionSort(s []int) []int {
 
 func main() {
 
-	slice := generateSlice(20)
-	fmt.Println("\n--- Unsorted --- \n\n", slice)
-	fmt.Println("\n--- Sorted ---\n\n", InsertionSort(slice), "\n")
+	slice := generateSlice(100000)
+	//fmt.Println("\n--- Unsorted --- \n\n", slice)
+	//fmt.Println("\n--- Sorted ---\n\n", InsertionSort(slice), "\n")
+	defer timeTrack(time.Now(), "InsertionSort")
+	InsertionSort(slice)
+}
+
+func timeTrack(start time.Time, name string) {
+	elapsed := time.Since(start)
+	log.Printf("%s took %s", name, elapsed)
 }
 
 // Generates a slice of size, size filled with random numbers

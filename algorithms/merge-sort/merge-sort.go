@@ -1,16 +1,23 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"math/rand"
 	"time"
 )
 
 func main() {
 
-	slice := generateSlice(20)
-	fmt.Println("\n--- Unsorted --- \n\n", slice)
-	fmt.Println("\n--- Sorted ---\n\n", mergeSort(slice), "\n")
+	slice := generateSlice(10000)
+	//fmt.Println("\n--- Unsorted --- \n\n", slice)
+	defer timeTrack(time.Now(), "MergeSort")
+	mergeSort(slice)
+	//fmt.Println("\n--- Sorted ---\n\n", mergeSort(slice), "\n")
+}
+
+func timeTrack(start time.Time, name string) {
+	elapsed := time.Since(start)
+	log.Printf("%s took %s", name, elapsed)
 }
 
 // Generates a slice of size, size filled with random numbers

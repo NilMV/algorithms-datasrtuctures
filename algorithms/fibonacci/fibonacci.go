@@ -38,13 +38,8 @@ func fib(x int) int {
 }
 
 func main() {
-
-	//slice := generateSlice(10000)
-	//fmt.Println("\n--- Unsorted --- \n\n", slice)
-	fib := FibMemoized
 	defer timeTrack(time.Now(), "fibonacci")
-	fmt.Println(fib(50))
-	//fmt.Println("\n--- Sorted ---\n\n", mergeSort(slice), "\n")
+	fmt.Println(FibMemoized(50))
 }
 
 func timeTrack(start time.Time, name string) {

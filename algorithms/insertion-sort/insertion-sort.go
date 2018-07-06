@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"math/rand"
 	"time"
@@ -8,26 +9,31 @@ import (
 
 //InsertionSort algorithm based on Cormen's book
 func InsertionSort(s []int) []int {
-	for j := 1; j < len(s); j++ {
-		key := s[j]
+	innerS := make([]int, len(s))
+	copy(innerS, s)
+	for j := 1; j < len(innerS); j++ {
+		key := innerS[j]
 		i := j - 1
 		for i >= 0 && s[i] > key {
-			s[i+1] = s[i]
+			innerS[i+1] = innerS[i]
 			i = i - 1
 		}
-		s[i+1] = key
+		innerS[i+1] = key
 	}
-	return s
+	return innerS
 
 }
 
 func main() {
 
-	slice := generateSlice(100000)
+	slice := generateSlice(10)
 	//fmt.Println("\n--- Unsorted --- \n\n", slice)
 	//fmt.Println("\n--- Sorted ---\n\n", InsertionSort(slice), "\n")
 	defer timeTrack(time.Now(), "InsertionSort")
-	InsertionSort(slice)
+	sortedSlice := InsertionSort(slice)
+	fmt.Print(slice)
+	fmt.Print(sortedSlice)
+
 }
 
 func timeTrack(start time.Time, name string) {
